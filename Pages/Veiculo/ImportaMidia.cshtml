@@ -101,19 +101,19 @@
         <section class="midia-card">
             <div class="midia-card-header">
                 <h2 class="midia-card-title">Prévia da importação</h2>
-                <p class="midia-card-subtitle">As fotos só são importadas quando todos os registros estiverem válidos.</p>
+                <p class="midia-card-subtitle">Os registros válidos podem ser importados mesmo que outros itens do lote tenham pendências.</p>
             </div>
             <div class="midia-card-body">
                 @if (Model.Preview.CanImport)
                 {
                     <div class="midia-alert midia-alert-success">
-                        Prévia válida. Os arquivos serão copiados para `wwwroot/uploads/veiculos/{id}` e já ficarão prontos para o site.
+                        Existem registros prontos para importação. Os arquivos locais serão copiados para `wwwroot/uploads/veiculos/{id}` e o restante pode usar `urlOrigem`.
                     </div>
                 }
                 else
                 {
                     <div class="midia-alert midia-alert-danger">
-                        Existem pendências na importação das mídias. Corrija o JSON ou os arquivos físicos antes de continuar.
+                        Nenhum registro válido foi encontrado para importação neste lote.
                     </div>
                 }
 
