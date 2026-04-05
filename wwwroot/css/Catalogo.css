@@ -392,6 +392,7 @@
     }
 
     .catalog-results-topbar {
+        display: none;
         margin-bottom: .9rem;
     }
 }

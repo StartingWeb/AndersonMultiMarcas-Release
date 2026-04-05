@@ -476,6 +476,10 @@ body.lightbox-open {
         padding-top: 6.5rem;
     }
 
+    .gallery-stage {
+        touch-action: pan-y;
+    }
+
     .gallery-nav {
         width: 44px;
         height: 44px;
@@ -497,6 +501,11 @@ body.lightbox-open {
     .gallery-thumb {
         width: 112px;
         min-width: 112px;
+        scroll-snap-align: center;
+    }
+
+    .gallery-thumbs {
+        scroll-snap-type: x mandatory;
     }
 
     .detail-summary-list {
@@ -517,5 +526,9 @@ body.lightbox-open {
 
     .lightbox-next {
         right: calc(50% - 56px);
+    }
+
+    .lightbox-content {
+        touch-action: pan-y;
     }
 }

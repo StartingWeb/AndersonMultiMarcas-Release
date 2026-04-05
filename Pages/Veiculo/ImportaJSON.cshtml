@@ -1,0 +1,217 @@
+@page
+@model Concessionaria.Pages.Veiculo.ImportaJSONModel
+@using System.Globalization
+@{
+    ViewData["Title"] = "Importa JSON";
+    ViewData["TopbarTitle"] = "Importa JSON";
+    ViewData["TopbarSubtitle"] = "Importação de veículos via arquivo legado";
+    Layout = "_LayoutAdmin";
+
+    var culture = new CultureInfo("pt-BR");
+}
+
+<style>
+    :root {
+        --json-brand: #9f0a10;
+        --json-brand-dark: #7f0810;
+        --json-border: #ececec;
+        --json-text: #1d1d1d;
+        --json-muted: #667085;
+        --json-card-shadow: 0 10px 30px rgba(0,0,0,.05);
+        --json-error-bg: #fff1f2;
+        --json-error-border: #fecdd3;
+        --json-success-bg: #ecfdf3;
+        --json-success-border: #bbf7d0;
+    }
+
+    .json-shell { display: grid; gap: 1.25rem; }
+    .json-card { background: #fff; border: 1px solid var(--json-border); border-radius: 1rem; box-shadow: var(--json-card-shadow); overflow: hidden; }
+    .json-card-header { padding: 1.15rem 1.2rem 1rem; border-bottom: 1px solid var(--json-border); background: linear-gradient(180deg, #fff 0%, #fff8f8 100%); }
+    .json-card-title { margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--json-text); }
+    .json-card-subtitle { margin: .25rem 0 0; color: var(--json-muted); font-size: .9rem; }
+    .json-card-body { padding: 1.2rem; }
+    .json-upload { border: 1px dashed #d6d6d6; border-radius: 1rem; padding: 1rem; background: linear-gradient(180deg, #fff 0%, #fcfcfc 100%); }
+    .json-file { border-radius: .85rem; min-height: 46px; }
+    .json-helper { margin-top: .85rem; color: var(--json-muted); font-size: .88rem; line-height: 1.5; }
+    .json-actions { display: flex; justify-content: flex-end; gap: .75rem; flex-wrap: wrap; margin-top: 1rem; }
+    .json-btn-primary, .json-btn-secondary { min-height: 46px; border-radius: .85rem; padding: 0 1.2rem; font-weight: 600; border: none; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+    .json-btn-primary { background: linear-gradient(135deg, var(--json-brand) 0%, var(--json-brand-dark) 100%); color: #fff; }
+    .json-btn-secondary { background: #fff; color: var(--json-text); border: 1px solid var(--json-border); }
+    .json-alert { border-radius: .85rem; padding: .95rem 1rem; margin-bottom: 1rem; font-size: .92rem; }
+    .json-alert-danger { background: var(--json-error-bg); border: 1px solid var(--json-error-border); color: #9f1239; }
+    .json-alert-success { background: var(--json-success-bg); border: 1px solid var(--json-success-border); color: #166534; }
+    .json-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+    .json-box { border: 1px solid #efe7e8; background: #fff8f8; border-radius: .9rem; padding: .95rem; }
+    .json-box-label { display: block; margin-bottom: .3rem; font-size: .74rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--json-muted); }
+    .json-box-value { font-size: 1rem; font-weight: 700; color: var(--json-text); }
+    .json-table { width: 100%; border-collapse: collapse; }
+    .json-table th, .json-table td { padding: .85rem .8rem; border-bottom: 1px solid #f1f1f1; vertical-align: top; }
+    .json-table th { font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: var(--json-muted); background: #fafafa; }
+    .json-status-badge { display: inline-flex; align-items: center; border-radius: 999px; padding: .2rem .55rem; font-size: .75rem; font-weight: 700; }
+    .json-status-ok { background: #dcfce7; color: #166534; }
+    .json-status-error { background: #ffe4e6; color: #be123c; }
+    .json-errors { margin: 0; padding-left: 1rem; color: #9f1239; }
+    .json-raw { max-height: 280px; overflow: auto; margin-top: 1rem; border-radius: .9rem; background: #111827; color: #e5e7eb; padding: 1rem; font-size: .86rem; }
+
+    @@media (max-width: 992px) {
+        .json-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @@media (max-width: 768px) {
+        .json-summary { grid-template-columns: 1fr; }
+    }
+</style>
+
+<div class="container-fluid json-shell">
+    <section class="json-card">
+        <div class="json-card-header">
+            <h1 class="json-card-title">Importa JSON</h1>
+            <p class="json-card-subtitle">Envie um arquivo `.json` com um veículo ou uma lista de veículos no formato legado.</p>
+        </div>
+        <div class="json-card-body">
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div asp-validation-summary="ModelOnly" class="json-alert json-alert-danger"></div>
+            }
+
+            <form method="post" asp-page-handler="Preview" enctype="multipart/form-data">
+                <div class="json-upload">
+                    <input asp-for="Input.JsonFile" type="file" accept=".json,application/json" class="form-control json-file" />
+
+                    <div class="json-helper">
+                        Validações aplicadas: arquivo válido, JSON bem formado, `idLegado` obrigatório, loja existente,
+                        marca resolvida, modelo obrigatório, parsing de ano/KM/valor/data, bloqueio de duplicidade no próprio
+                        arquivo, bloqueio de duplicidade por `idLegado` já cadastrado e por placa já existente.
+                    </div>
+                </div>
+
+                <div class="json-actions">
+                    <a asp-page="./Index" class="json-btn-secondary">Voltar</a>
+                    <button type="submit" class="json-btn-primary">Gerar prévia</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    @if (Model.Preview != null)
+    {
+        <section class="json-card">
+            <div class="json-card-header">
+                <h2 class="json-card-title">Prévia da importação</h2>
+                <p class="json-card-subtitle">A importação só é liberada quando todos os registros estiverem válidos.</p>
+            </div>
+            <div class="json-card-body">
+                @if (Model.Preview.CanImport)
+                {
+                    <div class="json-alert json-alert-success">
+                        Prévia válida. Todos os registros passaram nas validações.
+                    </div>
+                }
+                else
+                {
+                    <div class="json-alert json-alert-danger">
+                        Existem pendências na importação. Corrija o arquivo JSON antes de continuar.
+                    </div>
+                }
+
+                <div class="json-summary">
+                    <div class="json-box">
+                        <span class="json-box-label">Registros</span>
+                        <div class="json-box-value">@Model.Preview.Items.Count</div>
+                    </div>
+                    <div class="json-box">
+                        <span class="json-box-label">Válidos</span>
+                        <div class="json-box-value">@Model.Preview.Items.Count(x => x.CanImport)</div>
+                    </div>
+                    <div class="json-box">
+                        <span class="json-box-label">Com erro</span>
+                        <div class="json-box-value">@Model.Preview.Items.Count(x => !x.CanImport)</div>
+                    </div>
+                    <div class="json-box">
+                        <span class="json-box-label">Duplicidades</span>
+                        <div class="json-box-value">@Model.Preview.Errors.Count(x => x.Contains("duplic", StringComparison.OrdinalIgnoreCase) || x.Contains("já existe", StringComparison.OrdinalIgnoreCase))</div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="json-table">
+                        <thead>
+                            <tr>
+                                <th>Legado</th>
+                                <th>Título</th>
+                                <th>Loja / Marca</th>
+                                <th>Ano / KM</th>
+                                <th>Preço</th>
+                                <th>Status</th>
+                                <th>Erros</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var item in Model.Preview.Items)
+                        {
+                            <tr>
+                                <td>@item.IdLegado</td>
+                                <td>
+                                    <strong>@item.Titulo</strong><br />
+                                    <span class="text-muted">@(item.Placa ?? "-")</span>
+                                </td>
+                                <td>
+                                    @(item.Loja?.Nome ?? item.LojaNome ?? "-")<br />
+                                    <span class="text-muted">@(item.Marca?.Nome ?? item.MarcaNome ?? "-")</span>
+                                </td>
+                                <td>
+                                    @($"{item.AnoFabricacao?.ToString() ?? "-"} / {item.AnoModelo?.ToString() ?? "-"}")<br />
+                                    <span class="text-muted">@(item.Quilometragem.HasValue ? $"{item.Quilometragem.Value:N0} km" : "-")</span>
+                                </td>
+                                <td>@(item.PrecoVenda.HasValue ? item.PrecoVenda.Value.ToString("C", culture) : "-")</td>
+                                <td>
+                                    @if (item.CanImport)
+                                    {
+                                        <span class="json-status-badge json-status-ok">Pronto</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="json-status-badge json-status-error">Bloqueado</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.Errors.Count == 0)
+                                    {
+                                        <span class="text-success fw-semibold">Sem pendências</span>
+                                    }
+                                    else
+                                    {
+                                        <ul class="json-errors">
+                                            @foreach (var error in item.Errors)
+                                            {
+                                                <li>@error</li>
+                                            }
+                                        </ul>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+
+                <form method="post" asp-page-handler="Import" class="mt-4">
+                    <textarea asp-for="Input.RawJson" hidden></textarea>
+
+                    <div class="json-actions">
+                        <button type="submit" class="json-btn-primary" @(Model.Preview.CanImport ? null : "disabled")>Importar registros</button>
+                    </div>
+                </form>
+
+                <details class="mt-3">
+                    <summary class="fw-semibold">Ver JSON carregado</summary>
+                    <pre class="json-raw">@Model.Preview.RawJson</pre>
+                </details>
+            </div>
+        </section>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
