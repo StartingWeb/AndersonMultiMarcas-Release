@@ -128,7 +128,7 @@
     background: rgba(255, 255, 255, 0.14);
     color: #fff;
     backdrop-filter: blur(4px);
-    z-index: 1;
+    z-index: 0;
 }
 
 .catalog-brandline {

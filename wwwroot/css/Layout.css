@@ -517,7 +517,7 @@ a {
 .catalog-actions .btn,
 .vehicle-tag {
     position: relative;
-    z-index: 2;
+    z-index: 1;
 }
 
 .vehicle-tag {

@@ -2,7 +2,7 @@
     padding: 7rem 0 2rem;
     padding-top: 6rem;
     position: relative;
-    z-index: 40;
+    z-index: 2000;
     background:
         radial-gradient(circle at top left, rgba(166, 29, 36, 0.12), transparent 30%),
         linear-gradient(180deg, #f8f9fb 0%, #ffffff 100%);
@@ -10,7 +10,7 @@
 
 .catalog-search-panel {
     position: relative;
-    z-index: 50;
+    z-index: 2010;
     display: grid;
     gap: 1.5rem;
     justify-items: center;
@@ -62,7 +62,7 @@
     width: 100%;
     max-width: 760px;
     position: relative;
-    z-index: 60;
+    z-index: 2020;
 }
 
 .catalog-search-input-group {
