@@ -48,3 +48,47 @@
         showImage(0);
     });
 })();
+
+(function () {
+    const videos = Array.from(document.querySelectorAll('video[data-autoplay-video]'));
+
+    if (!videos.length) {
+        return;
+    }
+
+    function tryPlay(video) {
+        video.muted = true;
+        video.defaultMuted = true;
+        video.setAttribute('muted', '');
+        video.setAttribute('playsinline', '');
+        video.setAttribute('webkit-playsinline', 'true');
+
+        const playPromise = video.play();
+
+        if (playPromise && typeof playPromise.catch === 'function') {
+            playPromise.catch(function () {
+                // Safari may block the first attempt until the media is ready or the page becomes visible.
+            });
+        }
+    }
+
+    videos.forEach(function (video) {
+        if (video.readyState >= 2) {
+            tryPlay(video);
+        }
+
+        video.addEventListener('loadedmetadata', function () {
+            tryPlay(video);
+        });
+
+        video.addEventListener('canplay', function () {
+            tryPlay(video);
+        });
+
+        document.addEventListener('visibilitychange', function () {
+            if (!document.hidden && video.paused) {
+                tryPlay(video);
+            }
+        });
+    });
+})();
