@@ -261,7 +261,7 @@
                     </div>
                     <div class="import-box">
                         <span class="import-box-label">Preço</span>
-                        <div class="import-box-value">@(Model.Preview.PrecoVenda.HasValue ? Model.Preview.PrecoVenda.Value.ToString("C", culture) : "-")</div>
+                        <div class="import-box-value">@(Model.Preview.PrecoVenda.HasValue ? Model.Preview.PrecoVenda.Value.ToBrazilianCurrency() : "-")</div>
                     </div>
                     <div class="import-box">
                         <span class="import-box-label">Ano / Modelo</span>
