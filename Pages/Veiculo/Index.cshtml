@@ -477,7 +477,7 @@
                                 </td>
                                 <td data-label="Preço">
                                     <span class="vehicle-price">
-                                        @(precoPrincipal.HasValue ? precoPrincipal.Value.ToString("C") : "Não informado")
+                                        @(precoPrincipal.HasValue ? precoPrincipal.Value.ToBrazilianCurrency() : "Não informado")
                                     </span>
                                 </td>
                                 <td class="text-end" data-label="Ação">

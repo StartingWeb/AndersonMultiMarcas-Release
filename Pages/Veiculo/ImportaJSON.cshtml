@@ -163,7 +163,7 @@
                                     @($"{item.AnoFabricacao?.ToString() ?? "-"} / {item.AnoModelo?.ToString() ?? "-"}")<br />
                                     <span class="text-muted">@(item.Quilometragem.HasValue ? $"{item.Quilometragem.Value:N0} km" : "-")</span>
                                 </td>
-                                <td>@(item.PrecoVenda.HasValue ? item.PrecoVenda.Value.ToString("C", culture) : "-")</td>
+                                <td>@(item.PrecoVenda.HasValue ? item.PrecoVenda.Value.ToBrazilianCurrency() : "-")</td>
                                 <td>
                                     @if (item.CanImport)
                                     {
