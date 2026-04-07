@@ -1,6 +1,8 @@
 .catalog-search-section {
     padding: 7rem 0 2rem;
     padding-top: 6rem;
+    position: relative;
+    z-index: 40;
     background:
         radial-gradient(circle at top left, rgba(166, 29, 36, 0.12), transparent 30%),
         linear-gradient(180deg, #f8f9fb 0%, #ffffff 100%);
@@ -8,6 +10,7 @@
 
 .catalog-search-panel {
     position: relative;
+    z-index: 50;
     display: grid;
     gap: 1.5rem;
     justify-items: center;
@@ -58,6 +61,8 @@
 .catalog-search-form {
     width: 100%;
     max-width: 760px;
+    position: relative;
+    z-index: 60;
 }
 
 .catalog-search-input-group {
