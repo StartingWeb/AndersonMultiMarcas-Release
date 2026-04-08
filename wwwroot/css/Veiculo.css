@@ -157,6 +157,7 @@
     aspect-ratio: 16 / 10;
     object-fit: cover;
     display: block;
+    max-height: 27rem;
 }
 
 .gallery-thumbs-shell {
@@ -234,6 +235,7 @@
     aspect-ratio: 4 / 3;
     object-fit: cover;
     display: block;
+    max-height: 6rem;
 }
 
 .detail-summary-card {
