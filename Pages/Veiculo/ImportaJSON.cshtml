@@ -153,7 +153,7 @@
                                 <td>
                                     @($"{item.AnoFabricacao?.ToString() ?? "-"} / {item.AnoModelo?.ToString() ?? "-"}")<br />
                                     <span class="text-muted">@(item.Quilometragem.HasValue ? $"{item.Quilometragem.Value:N0} km" : "-")</span><br />
-                                    <span class="text-muted">@(item.PrecoVenda.HasValue ? item.PrecoVenda.Value.ToString("C", culture) : "-")</span>
+                                    <span class="text-muted">@(item.PrecoVenda.HasValue && item.PrecoVenda.Value > 0m ? item.PrecoVenda.Value.ToString("C", culture) : "Consulte")</span>
                                 </td>
                                 <td class="import-photos">
                                     Informado: @item.TotalFotosInformado<br />
