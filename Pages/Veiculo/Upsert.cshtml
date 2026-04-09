@@ -832,6 +832,20 @@
 
                         <div class="col-12 col-md-6 col-xl-3">
                             <div class="switch-field">
+                                <label class="switch-wrapper" for="Veiculo_MotoEletrica">
+                                    <input asp-for="Veiculo.MotoEletrica" class="switch-input" id="Veiculo_MotoEletrica" type="checkbox" />
+                                    <span class="switch-slider"></span>
+                                    <span class="switch-text">
+                                        <span class="switch-title">Moto elétrica</span>
+                                        <span class="switch-subtitle">Identifica como moto elétrica.</span>
+                                    </span>
+                                </label>
+                                <span id="statusVeiculoMotoEletrica" class="switch-status">Não</span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-xl-3">
+                            <div class="switch-field">
                                 <label class="switch-wrapper" for="Veiculo_AceitaTroca">
                                     <input asp-for="Veiculo.AceitaTroca" class="switch-input" id="Veiculo_AceitaTroca" type="checkbox" />
                                     <span class="switch-slider"></span>
@@ -1269,6 +1283,7 @@
             bindSwitchStatus('Veiculo_Vendido', 'statusVeiculoVendido', 'Sim', 'Não');
             bindSwitchStatus('Veiculo_Destaque', 'statusVeiculoDestaque', 'Sim', 'Não');
             bindSwitchStatus('Veiculo_Seminovo', 'statusVeiculoSeminovo', 'Sim', 'Não');
+            bindSwitchStatus('Veiculo_MotoEletrica', 'statusVeiculoMotoEletrica', 'Sim', 'Não');
             bindSwitchStatus('Veiculo_AceitaTroca', 'statusVeiculoAceitaTroca', 'Sim', 'Não');
             bindSwitchStatus('Veiculo_Financiavel', 'statusVeiculoFinanciavel', 'Sim', 'Não');
 
