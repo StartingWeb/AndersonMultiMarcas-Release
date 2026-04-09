@@ -289,6 +289,10 @@
     padding-top: 0;
 }
 
+.home-premium-container {
+    max-width: 1380px;
+}
+
 .home-featured-shell {
     padding: 2rem;
     border-radius: 2rem;
