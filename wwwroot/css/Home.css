@@ -297,6 +297,51 @@
     border: 1px solid rgba(17, 24, 39, .06);
 }
 
+.home-featured-shell .catalog-thumb,
+.home-featured-shell .catalog-thumb-track {
+    min-height: 160px;
+}
+
+.home-featured-shell .vehicle-thumb {
+    max-height: 9rem;
+}
+
+.home-featured-shell .catalog-card .vehicle-body {
+    padding: .8rem;
+}
+
+.home-featured-shell .catalog-card .vehicle-name {
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+.home-featured-shell .catalog-highlight-text {
+    font-size: .84rem;
+    line-height: 1.4;
+}
+
+.home-featured-shell .catalog-specs {
+    margin: .65rem 0;
+}
+
+.home-featured-shell .catalog-specs span {
+    padding: .32rem .62rem;
+    font-size: .72rem;
+}
+
+.home-featured-shell .catalog-card .vehicle-meta {
+    margin: .45rem 0;
+}
+
+.home-featured-shell .catalog-card .vehicle-price {
+    font-size: 1.1rem;
+    margin-bottom: .45rem;
+}
+
+.home-featured-shell .catalog-actions {
+    margin-top: .7rem;
+}
+
 .home-affordable-shell {
     margin-top: -1rem;
 }
@@ -466,6 +511,16 @@
 
     .home-preview-cta {
         width: 100%;
+    }
+
+    .home-preview-media {
+        background: #f8fafc;
+    }
+
+    .home-preview-image {
+        object-fit: contain;
+        object-position: center;
+        background: #f8fafc;
     }
 
     .home-featured-intro,

@@ -511,6 +511,16 @@ body.lightbox-open {
     }
 
     .gallery-stage {
+        background: #f8fafc;
+    }
+
+    .gallery-main-image {
+        object-fit: contain;
+        object-position: center;
+        background: #f8fafc;
+    }
+
+    .gallery-stage {
         touch-action: pan-y;
     }
 
@@ -536,6 +546,12 @@ body.lightbox-open {
         width: 112px;
         min-width: 112px;
         scroll-snap-align: center;
+    }
+
+    .gallery-thumb img {
+        object-fit: contain;
+        object-position: center;
+        background: #f8fafc;
     }
 
     .gallery-thumbs {
