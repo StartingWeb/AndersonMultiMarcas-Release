@@ -378,6 +378,72 @@
     margin-bottom: 1rem;
 }
 
+.seller-contact-dialog {
+    max-width: 560px;
+}
+
+.seller-contact-body {
+    max-height: 62vh;
+    overflow-y: auto;
+}
+
+.seller-contact-list {
+    display: grid;
+    gap: .8rem;
+}
+
+.seller-contact-card {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: .8rem;
+    padding: .65rem .75rem;
+    border: 1px solid #eef1f4;
+    border-radius: .9rem;
+    background: #fff;
+}
+
+.seller-contact-photo {
+    width: 52px;
+    height: 52px;
+    border-radius: 999px;
+    object-fit: cover;
+    border: 1px solid #e5e7eb;
+}
+
+.seller-contact-name {
+    font-weight: 700;
+    color: #111827;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.seller-contact-whatsapp {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #25d366;
+    border: 1px solid rgba(37, 211, 102, .35);
+    background: rgba(37, 211, 102, .08);
+    text-decoration: none;
+    transition: .2s ease;
+}
+
+.seller-contact-whatsapp i {
+    font-size: 1.15rem;
+    line-height: 1;
+}
+
+.seller-contact-whatsapp:hover {
+    background: #25d366;
+    color: #fff;
+    border-color: #25d366;
+}
+
 .detail-info-stack {
     align-self: start;
 }
@@ -589,5 +655,25 @@ body.lightbox-open {
     .lightbox-zoom-btn {
         width: 42px;
         height: 42px;
+    }
+
+    .seller-contact-dialog {
+        max-width: min(100vw - 1rem, 560px);
+        margin: .5rem auto;
+    }
+
+    .seller-contact-body {
+        max-height: 72vh;
+    }
+
+    .seller-contact-card {
+        grid-template-columns: 44px minmax(0, 1fr) auto;
+        padding: .55rem .6rem;
+        gap: .6rem;
+    }
+
+    .seller-contact-photo {
+        width: 44px;
+        height: 44px;
     }
 }
