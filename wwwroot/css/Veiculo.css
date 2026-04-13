@@ -409,6 +409,7 @@
     border-radius: 999px;
     object-fit: cover;
     border: 1px solid #e5e7eb;
+    background: #f3f4f6;
 }
 
 .seller-contact-name {
@@ -419,29 +420,31 @@
     text-overflow: ellipsis;
 }
 
-.seller-contact-whatsapp {
-    width: 40px;
-    height: 40px;
-    border-radius: 999px;
+.seller-contact-action {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #25d366;
-    border: 1px solid rgba(37, 211, 102, .35);
-    background: rgba(37, 211, 102, .08);
+    gap: .45rem;
+    padding: .55rem .85rem;
+    border-radius: .75rem;
+    color: #fff;
+    border: 1px solid #25d366;
+    background: #25d366;
     text-decoration: none;
+    font-weight: 700;
+    white-space: nowrap;
     transition: .2s ease;
 }
 
-.seller-contact-whatsapp i {
-    font-size: 1.15rem;
+.seller-contact-action i {
+    font-size: 1rem;
     line-height: 1;
 }
 
-.seller-contact-whatsapp:hover {
-    background: #25d366;
+.seller-contact-action:hover {
+    background: #1da851;
+    border-color: #1da851;
     color: #fff;
-    border-color: #25d366;
 }
 
 .detail-info-stack {
@@ -667,7 +670,7 @@ body.lightbox-open {
     }
 
     .seller-contact-card {
-        grid-template-columns: 44px minmax(0, 1fr) auto;
+        grid-template-columns: 44px minmax(0, 1fr);
         padding: .55rem .6rem;
         gap: .6rem;
     }
@@ -675,5 +678,11 @@ body.lightbox-open {
     .seller-contact-photo {
         width: 44px;
         height: 44px;
+    }
+
+    .seller-contact-action {
+        grid-column: 1 / -1;
+        width: 100%;
+        margin-top: .15rem;
     }
 }
