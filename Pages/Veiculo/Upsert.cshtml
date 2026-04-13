@@ -575,6 +575,7 @@
 
                 <input type="hidden" asp-for="Veiculo.Id" />
                 <input type="hidden" asp-for="Veiculo.DataCadastro" />
+                <input type="hidden" asp-for="Veiculo.Titulo" />
                 <input type="hidden" asp-for="MidiasOrdenadasJson" id="MidiasOrdenadasJson" />
                 <input type="hidden" asp-for="CapaItemKey" id="CapaItemKey" />
                 <input type="hidden" name="NovaMarcaNome" id="NovaMarcaNome" />
@@ -610,18 +611,12 @@
                         </div>
 
                         <div class="col-12 col-lg-6">
-                            <label asp-for="Veiculo.Titulo" class="form-label">Título</label>
-                            <input asp-for="Veiculo.Titulo" class="form-control" maxlength="150" placeholder="Ex.: Onix LT 1.0 Turbo Automático" />
-                            <span asp-validation-for="Veiculo.Titulo" class="text-danger"></span>
-                        </div>
-
-                        <div class="col-12 col-lg-3">
                             <label asp-for="Veiculo.Modelo" class="form-label">Modelo</label>
                             <input asp-for="Veiculo.Modelo" class="form-control" maxlength="100" placeholder="Ex.: Onix" />
                             <span asp-validation-for="Veiculo.Modelo" class="text-danger"></span>
                         </div>
 
-                        <div class="col-12 col-lg-3">
+                        <div class="col-12 col-lg-6">
                             <label asp-for="Veiculo.Versao" class="form-label">Versão</label>
                             <input asp-for="Veiculo.Versao" class="form-control" maxlength="100" placeholder="Ex.: LTZ" />
                             <span asp-validation-for="Veiculo.Versao" class="text-danger"></span>
@@ -693,53 +688,10 @@
                         </div>
 
                         <div class="col-12 col-md-4">
-                            <label asp-for="Veiculo.Chassi" class="form-label">Chassi</label>
-                            <input asp-for="Veiculo.Chassi"
-                                   class="form-control js-mask-chassi text-uppercase"
-                                   maxlength="17"
-                                   placeholder="Somente letras e números" />
-                            <span asp-validation-for="Veiculo.Chassi" class="text-danger"></span>
-                        </div>
-
-                        <div class="col-12 col-md-4">
-                            <label asp-for="Veiculo.Renavam" class="form-label">Renavam</label>
-                            <input asp-for="Veiculo.Renavam"
-                                   class="form-control js-mask-renavam"
-                                   maxlength="11"
-                                   inputmode="numeric"
-                                   placeholder="00000000000" />
-                            <span asp-validation-for="Veiculo.Renavam" class="text-danger"></span>
-                        </div>
-
-                        <div class="col-12 col-md-4">
                             <label asp-for="Veiculo.PrecoVenda" class="form-label">Preço de venda</label>
                             <div class="input-with-prefix">
                                 <span class="prefix">R$</span>
                                 <input asp-for="Veiculo.PrecoVenda"
-                                       class="form-control js-mask-money"
-                                       type="text"
-                                       inputmode="decimal"
-                                       placeholder="0,00" />
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-md-4">
-                            <label asp-for="Veiculo.PrecoPromocional" class="form-label">Preço promocional</label>
-                            <div class="input-with-prefix">
-                                <span class="prefix">R$</span>
-                                <input asp-for="Veiculo.PrecoPromocional"
-                                       class="form-control js-mask-money"
-                                       type="text"
-                                       inputmode="decimal"
-                                       placeholder="0,00" />
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-md-4">
-                            <label asp-for="Veiculo.PrecoFipe" class="form-label">Preço FIPE</label>
-                            <div class="input-with-prefix">
-                                <span class="prefix">R$</span>
-                                <input asp-for="Veiculo.PrecoFipe"
                                        class="form-control js-mask-money"
                                        type="text"
                                        inputmode="decimal"
@@ -1328,14 +1280,6 @@
                 return lettersAndNumbersOnly(value).toUpperCase().substring(0, 7);
             }
 
-            function formatRenavam(value) {
-                return digitsOnly(value).substring(0, 11);
-            }
-
-            function formatChassi(value) {
-                return lettersAndNumbersOnly(value).toUpperCase().substring(0, 17);
-            }
-
             function applyInputMasks() {
                 document.querySelectorAll('.js-mask-money').forEach(input => {
                     input.addEventListener('input', function () {
@@ -1379,41 +1323,10 @@
                     }
                 });
 
-                document.querySelectorAll('.js-mask-renavam').forEach(input => {
-                    input.addEventListener('input', function () {
-                        this.value = formatRenavam(this.value);
-                    });
-
-                    input.addEventListener('blur', function () {
-                        this.value = formatRenavam(this.value);
-                    });
-
-                    if (input.value) {
-                        input.value = formatRenavam(input.value);
-                    }
-                });
-
-                document.querySelectorAll('.js-mask-chassi').forEach(input => {
-                    input.addEventListener('input', function () {
-                        this.value = formatChassi(this.value);
-                    });
-
-                    input.addEventListener('blur', function () {
-                        this.value = formatChassi(this.value);
-                    });
-
-                    if (input.value) {
-                        input.value = formatChassi(input.value);
-                    }
-                });
             }
 
             function normalizeMaskedInputsBeforeSubmit() {
                 document.querySelectorAll('.js-mask-km').forEach(input => {
-                    input.value = digitsOnly(input.value);
-                });
-
-                document.querySelectorAll('.js-mask-renavam').forEach(input => {
                     input.value = digitsOnly(input.value);
                 });
 
@@ -1432,10 +1345,6 @@
 
                 document.querySelectorAll('.js-mask-placa').forEach(input => {
                     input.value = formatPlaca(input.value);
-                });
-
-                document.querySelectorAll('.js-mask-chassi').forEach(input => {
-                    input.value = formatChassi(input.value);
                 });
             }
 

@@ -427,9 +427,9 @@
                     <tbody>
                         @foreach (var veiculo in veiculos)
                         {
-                            var titulo = string.IsNullOrWhiteSpace(veiculo.Titulo)
-                                ? $"{veiculo.Marca?.Nome} {veiculo.Modelo}".Trim()
-                                : veiculo.Titulo;
+                            var titulo = (!string.IsNullOrWhiteSpace(veiculo.Marca?.Nome) || !string.IsNullOrWhiteSpace(veiculo.Modelo))
+                                ? string.Join(" ", new[] { veiculo.Marca?.Nome, veiculo.Modelo }.Where(x => !string.IsNullOrWhiteSpace(x)))
+                                : (string.IsNullOrWhiteSpace(veiculo.Titulo) ? $"{veiculo.Marca?.Nome} {veiculo.Versao}".Trim() : veiculo.Titulo);
 
                             var subtitulo = string.Join(" • ", new[]
                             {
@@ -442,9 +442,7 @@
                                 ? veiculo.DataCadastro.ToString("MM/yyyy")
                                 : "-";
 
-                            var precoPrincipal = veiculo.PrecoPromocional.HasValue && veiculo.PrecoPromocional.Value > 0
-                                ? veiculo.PrecoPromocional
-                                : veiculo.PrecoVenda;
+                            var precoPrincipal = veiculo.PrecoVenda;
 
                             var vendedorVenda = veiculo.Vendido
                                 ? (string.IsNullOrWhiteSpace(veiculo.Vendedor?.Nome) ? "-" : veiculo.Vendedor.Nome)

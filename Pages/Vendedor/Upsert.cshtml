@@ -191,15 +191,15 @@
             transition: transform .25s ease;
         }
 
-    .switch-input:checked + .switch-slider {
+    .switch-input:checked ~ .switch-slider {
         background: var(--brand-primary);
     }
 
-        .switch-input:checked + .switch-slider::before {
+        .switch-input:checked ~ .switch-slider::before {
             transform: translateX(22px);
         }
 
-    .switch-input:focus + .switch-slider {
+    .switch-input:focus ~ .switch-slider {
         box-shadow: 0 0 0 .2rem rgba(159, 10, 16, .15);
     }
 
@@ -496,17 +496,15 @@
                                             Ver foto atual
                                         </a>
 
-                                        <form method="post" asp-page-handler="DeletePhoto" class="m-0">
-                                            @Html.AntiForgeryToken()
-                                            <input type="hidden" name="Vendedor.Id" value="@Model.Vendedor.Id" />
-                                            <button type="button"
-                                                    class="btn btn-danger-soft"
-                                                    data-confirm-delete
-                                                    data-confirm-message="Deseja excluir a foto atual deste vendedor?">
-                                                <i class="bi bi-trash me-2"></i>
-                                                Excluir foto
-                                            </button>
-                                        </form>
+                                        <button type="submit"
+                                                class="btn btn-danger-soft"
+                                                asp-page-handler="DeletePhoto"
+                                                formnovalidate
+                                                data-confirm-delete
+                                                data-confirm-message="Deseja excluir a foto atual deste vendedor?">
+                                            <i class="bi bi-trash me-2"></i>
+                                            Excluir foto
+                                        </button>
                                     </div>
                                 }
                             </div>
