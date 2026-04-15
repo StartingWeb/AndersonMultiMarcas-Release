@@ -773,11 +773,17 @@ a {
 .seller-contact-body {
     max-height: 62vh;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    contain: content;
+    transform: translateZ(0);
 }
 
 .seller-contact-list {
     display: grid;
     gap: .8rem;
+    content-visibility: auto;
+    contain-intrinsic-size: 440px;
 }
 
 .seller-contact-card {
@@ -918,6 +924,7 @@ a {
     .seller-contact-body {
         max-height: 70vh;
         padding: .8rem;
+        -webkit-overflow-scrolling: touch;
     }
 
     .seller-contact-card {
