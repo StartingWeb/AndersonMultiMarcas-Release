@@ -756,6 +756,90 @@ a {
     transform: translateX(1px);
 }
 
+.seller-contact-modal .modal-content {
+    border-radius: 1rem;
+    border: 1px solid #eceff3;
+}
+
+.seller-contact-modal-subtitle {
+    color: var(--brand-muted);
+    font-size: .9rem;
+}
+
+.seller-contact-dialog {
+    max-width: 560px;
+}
+
+.seller-contact-body {
+    max-height: 62vh;
+    overflow-y: auto;
+}
+
+.seller-contact-list {
+    display: grid;
+    gap: .8rem;
+}
+
+.seller-contact-card {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: .8rem;
+    padding: .75rem;
+    border: 1px solid #eef1f4;
+    border-radius: .9rem;
+    background: #fff;
+}
+
+.seller-contact-photo {
+    width: 52px;
+    height: 52px;
+    border-radius: 999px;
+    object-fit: cover;
+    border: 1px solid #e5e7eb;
+    background: #f3f4f6;
+}
+
+.seller-contact-details {
+    min-width: 0;
+}
+
+.seller-contact-name {
+    font-weight: 700;
+    color: #111827;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.seller-contact-phone {
+    margin-top: .15rem;
+    font-size: .82rem;
+    color: var(--brand-muted);
+}
+
+.seller-contact-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .45rem;
+    padding: .6rem .9rem;
+    border-radius: .75rem;
+    color: #fff;
+    border: 1px solid #25d366;
+    background: #25d366;
+    text-decoration: none;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: .2s ease;
+}
+
+.seller-contact-action:hover {
+    background: #1da851;
+    border-color: #1da851;
+    color: #fff;
+}
+
 @media (max-width: 991.98px) {
     .main-navbar .container {
         gap: 1rem;
@@ -824,5 +908,32 @@ a {
         object-fit: contain;
         object-position: center;
         background: #f8fafc;
+    }
+
+    .seller-contact-dialog {
+        max-width: min(100vw - 1rem, 560px);
+        margin: .5rem auto;
+    }
+
+    .seller-contact-body {
+        max-height: 70vh;
+        padding: .8rem;
+    }
+
+    .seller-contact-card {
+        grid-template-columns: 44px minmax(0, 1fr);
+        gap: .65rem;
+        padding: .65rem;
+    }
+
+    .seller-contact-photo {
+        width: 44px;
+        height: 44px;
+    }
+
+    .seller-contact-action {
+        grid-column: 1 / -1;
+        width: 100%;
+        margin-top: .2rem;
     }
 }

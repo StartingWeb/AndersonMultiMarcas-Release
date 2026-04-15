@@ -50,6 +50,64 @@
 })();
 
 (function () {
+    const modalElement = document.getElementById('sellerContactModal');
+    if (!modalElement || typeof bootstrap === 'undefined') {
+        return;
+    }
+
+    const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+    const contextLabel = modalElement.querySelector('[data-seller-contact-context]');
+    const actions = Array.from(modalElement.querySelectorAll('[data-seller-phone][data-seller-name]'));
+    const triggers = Array.from(document.querySelectorAll('[data-whatsapp-modal]'));
+
+    if (!triggers.length) {
+        return;
+    }
+
+    function buildMessage(sellerName, vehicleTitle) {
+        const normalizedTitle = (vehicleTitle || '').trim();
+        if (normalizedTitle) {
+            return `Ola ${sellerName}, quero saber mais sobre ${normalizedTitle}.`;
+        }
+
+        return `Ola ${sellerName}, quero falar com um vendedor da Anderson Multimarcas.`;
+    }
+
+    function updateModalForContext(vehicleTitle) {
+        const contextTitle = (vehicleTitle || '').trim();
+
+        if (contextLabel) {
+            contextLabel.textContent = contextTitle
+                ? `Escolha um vendedor para continuar sobre: ${contextTitle}`
+                : 'Escolha um contato para continuar no WhatsApp.';
+        }
+
+        actions.forEach(function (action) {
+            const sellerName = action.getAttribute('data-seller-name') || 'vendedor';
+            const sellerPhone = action.getAttribute('data-seller-phone');
+
+            if (!sellerPhone) {
+                action.setAttribute('href', '#');
+                return;
+            }
+
+            const message = buildMessage(sellerName, contextTitle);
+            const href = `https://wa.me/${sellerPhone}?text=${encodeURIComponent(message)}`;
+            action.setAttribute('href', href);
+        });
+    }
+
+    triggers.forEach(function (trigger) {
+        trigger.addEventListener('click', function (event) {
+            event.preventDefault();
+            const vehicleTitle = trigger.getAttribute('data-vehicle-title') || '';
+            updateModalForContext(vehicleTitle);
+            modal.show(trigger);
+        });
+    });
+})();
+
+(function () {
     const videos = Array.from(document.querySelectorAll('video[data-autoplay-video]'));
 
     if (!videos.length) {
