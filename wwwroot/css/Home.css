@@ -381,6 +381,37 @@
     color: #5f0f13;
 }
 
+.home-electrified-shell {
+    margin-top: -1rem;
+    color: #ecfeff;
+    background:
+        radial-gradient(circle at top right, rgba(125, 211, 252, .28), transparent 36%),
+        linear-gradient(135deg, #052f43 0%, #0f766e 45%, #14532d 100%);
+    border-color: rgba(224, 242, 254, .22);
+    box-shadow: 0 32px 90px rgba(5, 47, 67, .28);
+}
+
+.home-electrified-shell .home-featured-kicker,
+.home-electrified-shell .section-title,
+.home-electrified-shell .section-subtitle {
+    color: #ecfeff;
+}
+
+.home-electrified-shell .home-featured-kicker {
+    background: rgba(224, 242, 254, .16);
+}
+
+.home-electrified-shell .btn-outline-brand {
+    background: rgba(240, 253, 250, .96);
+    border-color: transparent;
+    color: #0f766e;
+}
+
+.home-electrified-shell .btn-outline-brand:hover {
+    background: #ffffff;
+    color: #0b5c55;
+}
+
 .home-featured-intro {
     justify-content: space-between;
     align-items: end;
