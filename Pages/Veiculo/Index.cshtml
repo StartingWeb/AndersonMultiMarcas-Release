@@ -418,8 +418,7 @@
                             <th>Título</th>
                             <th>Placa</th>
                             <th>Mês/Ano</th>
-                            <th>Vendedor</th>
-                            <th>Baixa por</th>
+                            <th>Condição</th>
                             <th>Preço</th>
                             <th class="text-end">Ação</th>
                         </tr>
@@ -444,15 +443,7 @@
 
                             var precoPrincipal = veiculo.PrecoVenda;
 
-                            var vendedorVenda = veiculo.Vendido
-                                ? (string.IsNullOrWhiteSpace(veiculo.Vendedor?.Nome) ? "-" : veiculo.Vendedor.Nome)
-                                : "-";
-
-                            var usuarioBaixa = veiculo.Vendido
-                                ? (!string.IsNullOrWhiteSpace(veiculo.VendidoPorUsuario?.NomeCompleto)
-                                    ? veiculo.VendidoPorUsuario.NomeCompleto
-                                    : (string.IsNullOrWhiteSpace(veiculo.VendidoPorUsuario?.UserName) ? "-" : veiculo.VendidoPorUsuario.UserName))
-                                : "-";
+                            var condicaoVeiculo = veiculo.Seminovo ? "Seminovo" : "0km";
 
                             <tr>
                                 <td data-label="Título">
@@ -472,11 +463,8 @@
                                 <td data-label="Mês/Ano">
                                     <span class="vehicle-muted">@mesAno</span>
                                 </td>
-                                <td data-label="Vendedor">
-                                    <span class="vehicle-muted">@vendedorVenda</span>
-                                </td>
-                                <td data-label="Baixa por">
-                                    <span class="vehicle-muted">@usuarioBaixa</span>
+                                <td data-label="Condição">
+                                    <span class="vehicle-muted">@condicaoVeiculo</span>
                                 </td>
                                 <td data-label="Preço">
                                     <span class="vehicle-price">
@@ -535,3 +523,4 @@
         </div>
     }
 </div>
+
