@@ -1,9 +1,9 @@
-@page
+﻿@page
 @model Concessionaria.Pages.Veiculo.IndexModel
 @{
-    ViewData["Title"] = "Veículos";
-    ViewData["TopbarTitle"] = "Veículos";
-    ViewData["TopbarSubtitle"] = "Gerencie os veículos cadastrados";
+    ViewData["Title"] = "VeÃ­culos";
+    ViewData["TopbarTitle"] = "VeÃ­culos";
+    ViewData["TopbarSubtitle"] = "Gerencie os veÃ­culos cadastrados";
     Layout = "_LayoutAdmin";
 
     var veiculos = Model.Veiculos ?? new List<Domain.Veiculo>();
@@ -305,9 +305,9 @@
         <div>
             <h1 class="page-title">
                 <i class="bi bi-car-front-fill me-2"></i>
-                Veículos
+                VeÃ­culos
             </h1>
-            <p class="page-subtitle">Lista e gerenciamento dos veículos cadastrados</p>
+            <p class="page-subtitle">Lista e gerenciamento dos veÃ­culos cadastrados</p>
         </div>
 
         <div class="d-flex gap-2 flex-wrap">
@@ -318,7 +318,7 @@
 
             <a href="/Veiculo/Upsert" class="btn btn-brand px-3">
                 <i class="bi bi-plus-circle me-2"></i>
-                Novo veículo
+                Novo veÃ­culo
             </a>
         </div>
     </div>
@@ -328,7 +328,7 @@
             <form method="get">
                 <div class="row g-3">
                     <div class="col-12 col-md-4 col-xl-2">
-                        <label class="filter-label">Código</label>
+                        <label class="filter-label">CÃ³digo</label>
                         <input type="number"
                                name="Codigo"
                                value="@Model.Codigo"
@@ -338,26 +338,26 @@
                     </div>
 
                     <div class="col-12 col-md-8 col-xl-4">
-                        <label class="filter-label">Pesquisar veículo</label>
+                        <label class="filter-label">Pesquisar veÃ­culo</label>
                         <div class="input-icon-wrap">
                             <i class="bi bi-search"></i>
                             <input type="text"
                                    name="Filtro"
                                    value="@Model.Filtro"
                                    class="form-control"
-                                   placeholder="Título, modelo, versão, placa..." />
+                                   placeholder="TÃ­tulo, modelo, versÃ£o, placa..." />
                         </div>
                     </div>
 
                     <div class="col-12 col-md-6 col-xl-3">
-                        <label class="filter-label">Ordenação</label>
+                        <label class="filter-label">OrdenaÃ§Ã£o</label>
                         <select name="Ordem" class="form-select">
                             <option value="" selected="@(string.IsNullOrWhiteSpace(Model.Ordem))">Mais recentes</option>
                             <option value="antigos" selected="@(Model.Ordem == "antigos")">Mais antigos</option>
-                            <option value="titulo" selected="@(Model.Ordem == "titulo")">Título (A-Z)</option>
-                            <option value="titulo_desc" selected="@(Model.Ordem == "titulo_desc")">Título (Z-A)</option>
-                            <option value="preco_asc" selected="@(Model.Ordem == "preco_asc")">Menor preço</option>
-                            <option value="preco_desc" selected="@(Model.Ordem == "preco_desc")">Maior preço</option>
+                            <option value="titulo" selected="@(Model.Ordem == "titulo")">TÃ­tulo (A-Z)</option>
+                            <option value="titulo_desc" selected="@(Model.Ordem == "titulo_desc")">TÃ­tulo (Z-A)</option>
+                            <option value="preco_asc" selected="@(Model.Ordem == "preco_asc")">Menor preÃ§o</option>
+                            <option value="preco_desc" selected="@(Model.Ordem == "preco_desc")">Maior preÃ§o</option>
                         </select>
                     </div>
 
@@ -373,13 +373,20 @@
                     <div class="col-12 col-md-3 col-xl-2">
                         <label class="filter-label">Venda</label>
                         <select name="SomenteVendidos" class="form-select">
-                            <option value="false" selected="@(Model.SomenteVendidos == false)">Disponíveis</option>
+                            <option value="false" selected="@(Model.SomenteVendidos == false)">DisponÃ­veis</option>
                             <option value="true" selected="@(Model.SomenteVendidos == true)">Vendidos</option>
                             <option value="">Todos</option>
                         </select>
                     </div>
 
-                    <div class="col-12 col-xl-1 d-none d-xl-block"></div>
+                    <div class="col-12 col-md-3 col-xl-2">
+                        <label class="filter-label">Condição</label>
+                        <select name="SomenteSeminovo" class="form-select">
+                            <option value="">Todos</option>
+                            <option value="true" selected="@(Model.SomenteSeminovo == true)">Seminovo</option>
+                            <option value="false" selected="@(Model.SomenteSeminovo == false)">0km</option>
+                        </select>
+                    </div>
 
                     <div class="col-12">
                         <div class="search-actions-row">
@@ -402,7 +409,7 @@
     </div>
 
     <div class="results-topbar">
-        <h5 class="results-title">Veículos cadastrados</h5>
+        <h5 class="results-title">VeÃ­culos cadastrados</h5>
         <div class="results-counter">
             <strong>@totalVeiculos</strong> registro(s)
         </div>
@@ -415,12 +422,12 @@
                 <table class="table vehicle-table admin-responsive-table">
                     <thead>
                         <tr>
-                            <th>Título</th>
+                            <th>TÃ­tulo</th>
                             <th>Placa</th>
-                            <th>Mês/Ano</th>
-                            <th>Condição</th>
-                            <th>Preço</th>
-                            <th class="text-end">Ação</th>
+                            <th>MÃªs/Ano</th>
+                            <th>CondiÃ§Ã£o</th>
+                            <th>PreÃ§o</th>
+                            <th class="text-end">AÃ§Ã£o</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -430,7 +437,7 @@
                                 ? string.Join(" ", new[] { veiculo.Marca?.Nome, veiculo.Modelo }.Where(x => !string.IsNullOrWhiteSpace(x)))
                                 : (string.IsNullOrWhiteSpace(veiculo.Titulo) ? $"{veiculo.Marca?.Nome} {veiculo.Versao}".Trim() : veiculo.Titulo);
 
-                            var subtitulo = string.Join(" • ", new[]
+                            var subtitulo = string.Join(" â€¢ ", new[]
                             {
                                 veiculo.Marca?.Nome,
                                 veiculo.Modelo,
@@ -446,7 +453,7 @@
                             var condicaoVeiculo = veiculo.Seminovo ? "Seminovo" : "0km";
 
                             <tr>
-                                <td data-label="Título">
+                                <td data-label="TÃ­tulo">
                                     <div class="vehicle-title-cell">
                                         <span class="vehicle-title-main">@titulo</span>
                                         @if (!string.IsNullOrWhiteSpace(subtitulo))
@@ -460,18 +467,18 @@
                                         @(string.IsNullOrWhiteSpace(veiculo.Placa) ? "-" : veiculo.Placa)
                                     </span>
                                 </td>
-                                <td data-label="Mês/Ano">
+                                <td data-label="MÃªs/Ano">
                                     <span class="vehicle-muted">@mesAno</span>
                                 </td>
-                                <td data-label="Condição">
+                                <td data-label="CondiÃ§Ã£o">
                                     <span class="vehicle-muted">@condicaoVeiculo</span>
                                 </td>
-                                <td data-label="Preço">
+                                <td data-label="PreÃ§o">
                                     <span class="vehicle-price">
-                                        @(precoPrincipal.HasValue ? precoPrincipal.Value.ToBrazilianCurrency() : "Não informado")
+                                        @(precoPrincipal.HasValue ? precoPrincipal.Value.ToBrazilianCurrency() : "NÃ£o informado")
                                     </span>
                                 </td>
-                                <td class="text-end" data-label="Ação">
+                                <td class="text-end" data-label="AÃ§Ã£o">
                                     <div class="table-row-actions">
                                         <a asp-page="./Upsert" asp-route-id="@veiculo.Id" class="btn btn-brand table-action">
                                             <i class="bi bi-pencil-square"></i>
@@ -484,7 +491,8 @@
                                             <input type="hidden" name="Ordem" value="@Model.Ordem" />
                                             <input type="hidden" name="SomenteAtivos" value="@Model.SomenteAtivos" />
                                             <input type="hidden" name="SomenteVendidos" value="@Model.SomenteVendidos" />
-                                            <button type="button" class="btn-danger-soft table-action" data-confirm-delete data-confirm-message="Deseja excluir este veículo?">
+                                            <input type="hidden" name="SomenteSeminovo" value="@Model.SomenteSeminovo" />
+                                            <button type="button" class="btn-danger-soft table-action" data-confirm-delete data-confirm-message="Deseja excluir este veÃ­culo?">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </form>
@@ -504,9 +512,9 @@
                 <i class="bi bi-car-front"></i>
             </div>
 
-            <h5 class="fw-bold mb-2">Nenhum veículo encontrado</h5>
+            <h5 class="fw-bold mb-2">Nenhum veÃ­culo encontrado</h5>
             <p class="text-muted mb-4">
-                Não encontramos veículos com os filtros informados.
+                NÃ£o encontramos veÃ­culos com os filtros informados.
             </p>
 
             <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
@@ -517,10 +525,11 @@
 
                 <a asp-page="/Veiculo/Upsert" class="btn btn-brand">
                     <i class="bi bi-plus-circle me-2"></i>
-                    Cadastrar veículo
+                    Cadastrar veÃ­culo
                 </a>
             </div>
         </div>
     }
 </div>
+
 
