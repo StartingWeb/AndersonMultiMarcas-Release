@@ -361,33 +361,6 @@
                         </select>
                     </div>
 
-                    <div class="col-12 col-md-3 col-xl-2">
-                        <label class="filter-label">Status</label>
-                        <select name="SomenteAtivos" class="form-select">
-                            <option value="">Todos</option>
-                            <option value="true" selected="@(Model.SomenteAtivos == true)">Ativos</option>
-                            <option value="false" selected="@(Model.SomenteAtivos == false)">Inativos</option>
-                        </select>
-                    </div>
-
-                    <div class="col-12 col-md-3 col-xl-2">
-                        <label class="filter-label">Venda</label>
-                        <select name="SomenteVendidos" class="form-select">
-                            <option value="false" selected="@(Model.SomenteVendidos == false)">Disponíveis</option>
-                            <option value="true" selected="@(Model.SomenteVendidos == true)">Vendidos</option>
-                            <option value="">Todos</option>
-                        </select>
-                    </div>
-
-                    <div class="col-12 col-md-3 col-xl-2">
-                        <label class="filter-label">Condição</label>
-                        <select name="SomenteSeminovo" class="form-select">
-                            <option value="">Todos</option>
-                            <option value="true" selected="@(Model.SomenteSeminovo == true)">Seminovo</option>
-                            <option value="false" selected="@(Model.SomenteSeminovo == false)">0km</option>
-                        </select>
-                    </div>
-
                     <div class="col-12">
                         <div class="search-actions-row">
                             <div class="search-actions">
@@ -489,9 +462,6 @@
                                             <input type="hidden" name="Filtro" value="@Model.Filtro" />
                                             <input type="hidden" name="Codigo" value="@Model.Codigo" />
                                             <input type="hidden" name="Ordem" value="@Model.Ordem" />
-                                            <input type="hidden" name="SomenteAtivos" value="@Model.SomenteAtivos" />
-                                            <input type="hidden" name="SomenteVendidos" value="@Model.SomenteVendidos" />
-                                            <input type="hidden" name="SomenteSeminovo" value="@Model.SomenteSeminovo" />
                                             <button type="button" class="btn-danger-soft table-action" data-confirm-delete data-confirm-message="Deseja excluir este veículo?">
                                                 <i class="bi bi-trash"></i>
                                             </button>
@@ -531,5 +501,4 @@
         </div>
     }
 </div>
-
 
