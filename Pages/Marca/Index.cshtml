@@ -124,10 +124,29 @@
         min-height: 46px;
     }
 
-        .btn-soft-dark:hover {
-            background: #f8f8f8;
-            color: var(--brand-dark);
-        }
+    .btn-soft-dark:hover {
+        background: #f8f8f8;
+        color: var(--brand-dark);
+    }
+
+    .btn-danger-soft {
+        width: 42px;
+        height: 42px;
+        border-radius: .75rem;
+        font-weight: 700;
+        border: 1px solid #f4c7cb;
+        background: #fff4f4;
+        color: #b42318;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-danger-soft:hover {
+        background: #b42318;
+        border-color: #b42318;
+        color: #fff;
+    }
 
     .search-actions-row {
         display: flex;
@@ -447,6 +466,16 @@
                                         <a asp-page="./Upsert" asp-route-id="@marca.Id" class="btn btn-brand table-action">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
+
+                                        <form method="post" asp-page-handler="Delete" class="m-0">
+                                            <input type="hidden" name="id" value="@marca.Id" />
+                                            <input type="hidden" name="Filtro" value="@Model.Filtro" />
+                                            <input type="hidden" name="Ordem" value="@Model.Ordem" />
+                                            <input type="hidden" name="SomenteAtivas" value="@Model.SomenteAtivas" />
+                                            <button type="button" class="btn-danger-soft table-action" data-confirm-delete data-confirm-message="Deseja excluir esta marca?">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
