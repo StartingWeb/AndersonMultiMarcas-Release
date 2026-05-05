@@ -419,6 +419,7 @@
                     <thead>
                         <tr>
                             <th>Marca</th>
+                            <th>Carros</th>
                             <th>Status</th>
                             <th>Logo</th>
                             <th>Cadastro</th>
@@ -429,6 +430,7 @@
                         @foreach (var marca in marcas)
                         {
                             var logoUrl = string.IsNullOrWhiteSpace(marca.LogoUrl) ? "/background.png" : marca.LogoUrl;
+                            var quantidadeCarros = Model.QuantidadeCarrosPorMarca.TryGetValue(marca.Id, out var quantidade) ? quantidade : 0;
                             <tr>
                                 <td data-label="Marca">
                                     <div class="brand-title-cell">
@@ -440,6 +442,9 @@
                                             <div class="brand-title-sub">ID #@marca.Id</div>
                                         </div>
                                     </div>
+                                </td>
+                                <td data-label="Carros">
+                                    <span class="brand-muted">@quantidadeCarros</span>
                                 </td>
                                 <td data-label="Status">
                                     @if (marca.Ativo)
