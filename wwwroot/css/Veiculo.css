@@ -74,6 +74,23 @@
     margin-bottom: .85rem;
 }
 
+.btn-danger-brand {
+    background: #d61f2c;
+    border-color: #d61f2c;
+    color: #fff;
+    font-weight: 700;
+    border-radius: .8rem;
+    padding: .95rem 1.2rem;
+    box-shadow: 0 14px 30px rgba(214, 31, 44, 0.28);
+}
+
+.btn-danger-brand:hover,
+.btn-danger-brand:focus-visible {
+    background: #b81622;
+    border-color: #b81622;
+    color: #fff;
+}
+
 .commerce-actions {
     display: grid;
     gap: .8rem;
@@ -378,91 +395,6 @@
     margin-bottom: 1rem;
 }
 
-.seller-contact-dialog {
-    max-width: 560px;
-}
-
-.seller-contact-modal .modal-content {
-    border-radius: 1rem;
-    border: 1px solid #eceff3;
-}
-
-.seller-contact-modal-subtitle {
-    color: var(--brand-muted);
-    font-size: .9rem;
-}
-
-.seller-contact-body {
-    max-height: 62vh;
-    overflow-y: auto;
-}
-
-.seller-contact-list {
-    display: grid;
-    gap: .8rem;
-}
-
-.seller-contact-card {
-    display: grid;
-    grid-template-columns: 52px minmax(0, 1fr) auto;
-    align-items: center;
-    gap: .8rem;
-    padding: .75rem;
-    border: 1px solid #eef1f4;
-    border-radius: .9rem;
-    background: #fff;
-}
-
-.seller-contact-photo {
-    width: 52px;
-    height: 52px;
-    border-radius: 999px;
-    object-fit: cover;
-    border: 1px solid #e5e7eb;
-    background: #f3f4f6;
-}
-
-.seller-contact-name {
-    font-weight: 700;
-    color: #111827;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.seller-contact-phone {
-    margin-top: .15rem;
-    font-size: .82rem;
-    color: var(--brand-muted);
-}
-
-.seller-contact-action {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: .45rem;
-    padding: .55rem .85rem;
-    border-radius: .75rem;
-    color: #fff;
-    border: 1px solid #25d366;
-    background: #25d366;
-    text-decoration: none;
-    font-weight: 700;
-    white-space: nowrap;
-    transition: .2s ease;
-}
-
-.seller-contact-action i {
-    font-size: 1rem;
-    line-height: 1;
-}
-
-.seller-contact-action:hover {
-    background: #1da851;
-    border-color: #1da851;
-    color: #fff;
-}
-
 .detail-info-stack {
     align-self: start;
 }
@@ -676,30 +608,4 @@ body.lightbox-open {
         height: 42px;
     }
 
-    .seller-contact-dialog {
-        max-width: min(100vw - 1rem, 560px);
-        margin: .5rem auto;
-    }
-
-    .seller-contact-body {
-        max-height: 70vh;
-        padding: .8rem;
-    }
-
-    .seller-contact-card {
-        grid-template-columns: 44px minmax(0, 1fr);
-        padding: .65rem;
-        gap: .65rem;
-    }
-
-    .seller-contact-photo {
-        width: 44px;
-        height: 44px;
-    }
-
-    .seller-contact-action {
-        grid-column: 1 / -1;
-        width: 100%;
-        margin-top: .15rem;
-    }
 }

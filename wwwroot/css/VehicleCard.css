@@ -1,5 +1,8 @@
 .catalog-card {
     border-radius: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .catalog-thumb {
@@ -164,28 +167,43 @@
 }
 
 .catalog-actions {
-    margin-top: .85rem;
+    margin-top: auto;
+    padding-top: .35rem;
 }
 
 .catalog-card .vehicle-body {
     padding: .9rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    flex: 1;
 }
 
 .catalog-card .vehicle-name {
-    min-height: auto;
+    min-height: 2.6rem;
     margin-bottom: 0;
     font-size: 1.05rem;
     line-height: 1.25;
 }
 
 .catalog-card .vehicle-meta {
-    margin: .55rem 0;
+    margin: .2rem 0 0;
     font-size: .84rem;
 }
 
 .catalog-card .vehicle-price {
     font-size: 1.2rem;
-    margin-bottom: .55rem;
+    margin: .15rem 0 0;
+    min-height: 1.8rem;
+}
+
+.catalog-card .catalog-highlight-text {
+    min-height: 1.3rem;
+}
+
+.catalog-card .catalog-specs {
+    min-height: 2rem;
+    align-items: center;
 }
 
 @media (max-width: 767.98px) {
