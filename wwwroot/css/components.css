@@ -569,8 +569,53 @@ body.search-focus-open::before {
   position: relative;
   z-index: 6;
 }
-.vehicle-media { position:relative; aspect-ratio:4/3; background: var(--brand-surface-alt); }
-.vehicle-thumb { width:100%; height:100%; object-fit:cover; }
+.vehicle-media {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: #eef1f5;
+}
+.vehicle-media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(100deg, #e8ebf0 0%, #f6f7f9 42%, #e2e6ec 78%);
+  background-size: 220% 100%;
+  opacity: 1;
+  transition: opacity .28s ease;
+  animation: image-skeleton 1.15s ease-in-out infinite;
+}
+.vehicle-media.is-loaded::before,
+.vehicle-media.is-error::before {
+  opacity: 0;
+  pointer-events: none;
+  animation: none;
+}
+.vehicle-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transition: opacity .28s ease, transform .35s ease;
+}
+.vehicle-media.is-loaded .vehicle-thumb,
+.vehicle-media.is-error .vehicle-thumb {
+  opacity: 1;
+}
+.vehicle-card:hover .vehicle-media.is-loaded .vehicle-thumb {
+  transform: scale(1.015);
+}
+@keyframes image-skeleton {
+  0% { background-position: 180% 0; }
+  100% { background-position: -80% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vehicle-media::before {
+    animation: none;
+  }
+}
 .vehicle-tag { position:absolute; top:.8rem; left:.8rem; z-index:5; background: var(--brand-primary); color:#fff; padding:.2rem .55rem; border-radius: var(--radius-pill); font-size:.76rem; }
 .vehicle-body { padding:.95rem; }
 .vehicle-name { font-weight:700; color:#101828; margin-bottom:.35rem; }

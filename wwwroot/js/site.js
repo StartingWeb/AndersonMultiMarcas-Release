@@ -1,4 +1,55 @@
 (function () {
+    const progressiveImages = Array.from(document.querySelectorAll('img[data-progressive-image="true"]'));
+
+    if (progressiveImages.length) {
+        const markImage = function (image, state) {
+            const frame = image.closest('.vehicle-media, .home-ranking-thumb');
+            if (!frame) return;
+
+            frame.classList.remove('is-loading');
+            frame.classList.add(state);
+        };
+
+        progressiveImages.forEach(function (image) {
+            if (image.complete && image.naturalWidth > 0) {
+                markImage(image, 'is-loaded');
+                return;
+            }
+
+            if (image.complete) {
+                markImage(image, 'is-error');
+                return;
+            }
+
+            image.addEventListener('load', function () {
+                markImage(image, 'is-loaded');
+            }, { once: true });
+
+            image.addEventListener('error', function () {
+                markImage(image, 'is-error');
+            }, { once: true });
+        });
+
+        if ('IntersectionObserver' in window) {
+            const preloadObserver = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+
+                    const image = entry.target;
+                    image.loading = 'eager';
+                    image.fetchPriority = 'high';
+                    observer.unobserve(image);
+                });
+            }, { rootMargin: '900px 0px' });
+
+            progressiveImages
+                .filter(function (image) { return image.loading === 'lazy'; })
+                .forEach(function (image) { preloadObserver.observe(image); });
+        }
+    }
+})();
+
+(function () {
     const trackerSelector = '[data-track-vehicle-click="true"]';
 
     function trackVehicleClick(id) {

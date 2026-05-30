@@ -341,16 +341,44 @@
 }
 
 .home-ranking-thumb {
+    position: relative;
     border-radius: 1rem;
     overflow: hidden;
     background: #f3f4f6;
     aspect-ratio: 4 / 3;
 }
 
+.home-ranking-thumb::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(100deg, #e8ebf0 0%, #f6f7f9 42%, #e2e6ec 78%);
+    background-size: 220% 100%;
+    opacity: 1;
+    transition: opacity .28s ease;
+    animation: image-skeleton 1.15s ease-in-out infinite;
+}
+
+.home-ranking-thumb.is-loaded::before,
+.home-ranking-thumb.is-error::before {
+    opacity: 0;
+    pointer-events: none;
+    animation: none;
+}
+
 .home-ranking-thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+    opacity: 0;
+    transition: opacity .28s ease;
+}
+
+.home-ranking-thumb.is-loaded img,
+.home-ranking-thumb.is-error img {
+    opacity: 1;
 }
 
 .home-ranking-copy {
@@ -879,6 +907,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .home-ranking-thumb::before {
+        animation: none;
+    }
+
     .home-scroll-indicator-icon {
         animation: none;
     }
