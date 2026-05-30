@@ -1,0 +1,5 @@
+﻿wwwroot/uploads/
+*.log
+.vs/
+bin/
+obj/
