@@ -1,0 +1,42 @@
+name: Deploy Production
+
+run-name: Deploy ${{ github.sha }} to production
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: anderson-multimarcas-production
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy Anderson Multimarcas
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Show deployment context
+        run: |
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Branch: $GITHUB_REF_NAME"
+          echo "Commit: $GITHUB_SHA"
+
+      - name: Run deploy script on production server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          command_timeout: 30m
+          script: |
+            set -eu
+            echo "Starting production deploy for commit ${{ github.sha }}"
+            cd /opt/startingweb/apps/anderson-multimarcas
+            ./deploy.sh
+            echo "Production deploy finished for commit ${{ github.sha }}"
