@@ -1,5 +1,8 @@
 ﻿wwwroot/uploads/
 *.log
+.env
+.env.*
+!.env.example
 .vs/
 bin/
 obj/

@@ -1,0 +1,54 @@
+name: andersonmultimarcas
+
+services:
+  web:
+    image: startingweb/andersonmultimarcas-release:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: andersonmultimarcas-web
+    restart: unless-stopped
+    env_file:
+      - path: ./.env
+        required: false
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Production}
+      ASPNETCORE_URLS: ${ASPNETCORE_URLS:-http://+:8080}
+      ConnectionStrings__DefaultConnectionProd: ${ConnectionStrings__DefaultConnectionProd:?Configure ConnectionStrings__DefaultConnectionProd no .env}
+      Storage__Provider: ${Storage__Provider:-R2}
+      Storage__DualReadEnabled: ${Storage__DualReadEnabled:-true}
+      Storage__R2__AccountId: ${Storage__R2__AccountId:?Configure Storage__R2__AccountId no .env}
+      Storage__R2__AccessKeyId: ${Storage__R2__AccessKeyId:?Configure Storage__R2__AccessKeyId no .env}
+      Storage__R2__SecretAccessKey: ${Storage__R2__SecretAccessKey:?Configure Storage__R2__SecretAccessKey no .env}
+      Storage__R2__BucketName: ${Storage__R2__BucketName:?Configure Storage__R2__BucketName no .env}
+      Storage__R2__PublicBaseUrl: ${Storage__R2__PublicBaseUrl:?Configure Storage__R2__PublicBaseUrl no .env}
+      Storage__R2__ServiceUrl: ${Storage__R2__ServiceUrl:-}
+      Storage__R2__Region: ${Storage__R2__Region:-auto}
+      Seo__BaseUrl: ${Seo__BaseUrl:?Configure Seo__BaseUrl no .env}
+      DataProtection__ApplicationName: ${DataProtection__ApplicationName:-AndersonMultiMarcas}
+      DataProtection__KeysPath: ${DataProtection__KeysPath:-/home/app/.aspnet/DataProtection-Keys}
+      LegacyImageImport__RecoverPendingJobsOnStartup: ${LegacyImageImport__RecoverPendingJobsOnStartup:-false}
+    expose:
+      - "8080"
+    volumes:
+      - dataprotection-keys:/home/app/.aspnet/DataProtection-Keys
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS -H 'X-Forwarded-Proto: https' http://127.0.0.1:8080/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+volumes:
+  dataprotection-keys:
+    name: andersonmultimarcas-dataprotection-keys
+
+networks:
+  default:
+    external: true
+    name: startingweb_network
